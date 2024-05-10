@@ -14,3 +14,8 @@ dioxus = { version = "0.5", features = ["web", "router"] }
 tracing = "0.1.40"
 dioxus-logger = "0.5.0"
 manganis = "0.2.2"
+reqwest = { version = "0.12.4", features = ["json"] }
+async-recursion = "1.1.1"
+futures = "0.3.30"
+serde = "1.0.201"
+dotenv = "0.15.0"

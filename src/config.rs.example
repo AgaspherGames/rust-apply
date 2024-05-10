@@ -1,0 +1,2 @@
+pub static BACKEND_URL: &str = "...";
+pub static FILES_URL: &str = "...";

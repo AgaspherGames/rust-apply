@@ -1,10 +1,17 @@
 #![allow(non_snake_case)]
 
+use crate::components::internshipCard::InternshipCard;
 use crate::components::layout::Layout;
+use crate::pages::internshipsPage::InternshipsPage;
 use dioxus::prelude::*;
-use tracing::Level;
+use dotenv::dotenv;
+use std::env;
+use tracing::{info, Level};
 
+mod api;
+mod config;
 pub(crate) mod components;
+pub(crate) mod pages;
 
 // Urls are relative to your Cargo.toml file
 const _TAILWIND_URL: &str = manganis::mg!(file("public/tailwind.css"));
@@ -18,12 +25,23 @@ enum Route {
 }
 
 fn main() {
+    dotenv().ok();
+    // let backend_url = env::var("BACKEND_URL").unwrap();
+    println!("{:?}", env::args());
+
+    // let files_url = env::var("FILES_URL").expect("FILES_URL must be set");
+
+    // println!("Database URL: {}", backend_url);
+    // println!("API Key: {}", files_url);
+
     // Init logger
     dioxus_logger::init(Level::INFO).expect("failed to init logger");
     launch(App);
 }
 
 fn App() -> Element {
+    info!("aaaa");
+
     rsx! {
         Router::<Route> {}
     }
@@ -39,23 +57,14 @@ fn Blog(id: i32) -> Element {
 
 #[component]
 fn Home() -> Element {
-    let mut count = use_signal(|| 0);
-
     rsx! {
         Layout{
-        }
-        Link {
-            to: Route::Blog {
-                id: count()
-            },
-            class: "bg-red-500",
-
-            "Go to blogd"
-        }
-        div {
-            h1 { "High-Five counter: {count}" }
-            button { onclick: move |_| count += 1, "Up high! " }
-            button { onclick: move |_| count -= 1, "Down low!" }
+            body: rsx! {
+                div {
+                    class: "p-4",
+                    InternshipsPage {}
+                }
+            }
         }
     }
 }

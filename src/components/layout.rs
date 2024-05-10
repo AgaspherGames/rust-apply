@@ -3,12 +3,17 @@
 use crate::components::header::Header;
 use dioxus::prelude::*;
 
-#[component]
-pub fn Layout() -> Element {
+#[derive(PartialEq, Clone, Props)]
+pub struct LayoutProps {
+    body: Element,
+}
+
+pub fn Layout(props: LayoutProps) -> Element {
     rsx! {
         div {
-            class: "w-full bg-stone-900",
+            class: "w-full min-h-screen bg-black text-white",
             Header {}
+            {props.body}
         }
     }
 }
