@@ -1,25 +1,29 @@
 #![allow(non_snake_case)]
+extern crate chrono;
 
-use crate::components::internshipCard::InternshipCard;
 use crate::components::layout::Layout;
-use crate::pages::internshipsPage::InternshipsPage;
+use crate::pages::{internship_page::InternshipPage, internships_page::InternshipsPage};
+use components::layout;
 use dioxus::prelude::*;
 use dotenv::dotenv;
 use std::env;
 use tracing::{info, Level};
 
 mod api;
-mod config;
 pub(crate) mod components;
+mod config;
 pub(crate) mod pages;
 
 // Urls are relative to your Cargo.toml file
 const _TAILWIND_URL: &str = manganis::mg!(file("public/tailwind.css"));
 
-#[derive(Clone, Routable, Debug, PartialEq)]
+#[derive(Routable, Clone)]
 enum Route {
     #[route("/")]
     Home {},
+    #[route("/internship/:id")]
+    InternshipPage { id: String },
+    #[end_layout]
     #[route("/blog/:id")]
     Blog { id: i32 },
 }
@@ -61,7 +65,7 @@ fn Home() -> Element {
         Layout{
             body: rsx! {
                 div {
-                    class: "p-4",
+                    class: "p-4 ",
                     InternshipsPage {}
                 }
             }

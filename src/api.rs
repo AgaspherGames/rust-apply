@@ -45,10 +45,7 @@ pub async fn get_internships() -> Result<InternshipsResponse, reqwest::Error> {
     let url = format!("{}/{}", BACKEND_URL, "internship");
     reqwest::get(&url).await?.json().await
 }
-pub async fn get_internship() -> Result<Internship, reqwest::Error> {
-    let url = format!(
-        "{}/{}",
-        BACKEND_URL, "internship/3e7d9532-207f-4241-b420-59be0bb4877b"
-    );
+pub async fn get_internship(id: String) -> Result<Internship, reqwest::Error> {
+    let url = format!("{}/{}/{}", BACKEND_URL, "internship", id);
     reqwest::get(&url).await?.json().await
 }

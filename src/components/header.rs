@@ -8,15 +8,12 @@ pub fn Header() -> Element {
         div {
             class: "w-full bg-stone-900 text-stone-300 flex justify-between py-4 px-8",
             div{
-                p {
-                    "Apply"
+                Link {
+                    "Apply",
+                    to: "/"
                 }
             }
-            div{
-                button {
-                    "LogIn",
-                }
-            }
+
         }
     }
 }

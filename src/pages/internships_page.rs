@@ -1,7 +1,7 @@
 #![allow(non_snake_case)]
 
-use crate::api::{get_internship, get_internships};
-use crate::components::internshipCard::InternshipCard;
+use crate::api::get_internships;
+use crate::components::{internship_card::InternshipCard, loading_screen::LoadingScreen};
 use dioxus::prelude::*;
 
 #[component]
@@ -22,12 +22,12 @@ pub fn InternshipsPage() -> Element {
             }
         }
         Some(Err(err)) => {
-            // if there was an error, render the error
             rsx! {"An error occurred while fetching stories {err}"}
         }
         None => {
-            // if the future is not resolved yet, render a loading message
-            rsx! {"Loading items"}
+            rsx! {
+                LoadingScreen {}
+            }
         }
     }
 }
